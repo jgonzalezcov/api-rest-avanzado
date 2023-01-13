@@ -50,7 +50,6 @@ validateCategory = async (categoria) => {
     values: [categoria],
   }
   const { rows } = await pool.query(SQLquery)
-  console.log(rows)
   if (rows.length == 0) {
     return 'E8'
   } else {
@@ -63,7 +62,6 @@ validateMetal = async (metals) => {
     values: [metals],
   }
   const { rows } = await pool.query(SQLquery)
-  console.log(rows)
   if (rows.length == 0) {
     return 'E9'
   } else {
@@ -98,7 +96,6 @@ const validateFilter = async ({
   }
   if (categoria) {
     resultValidateCategroy = await validateCategory(categoria)
-    console.log(resultValidateCategroy)
     if (resultValidateCategroy === 'ok') {
       result = bugMaster[0]
     } else if (resultValidateCategroy === 'E8') {
@@ -108,7 +105,6 @@ const validateFilter = async ({
 
   if (metals) {
     resultValidateMetal = await validateMetal(metals)
-    console.log(resultValidateMetal)
     if (resultValidateMetal === 'ok') {
       result = bugMaster[0]
     } else if (resultValidateMetal === 'E9') {
