@@ -30,14 +30,14 @@ const getFilterJewelry = async ({
   precio_min,
   precio_max,
   categoria,
-  metals,
+  metal,
 }) => {
   let filtros = []
   if (id) filtros.push(`id = ${id}`)
   if (precio_max) filtros.push(`price <= ${precio_max}`)
   if (precio_min) filtros.push(`price >= ${precio_min}`)
   if (categoria) filtros.push(`category = '${categoria}'`)
-  if (metals) filtros.push(`metal = '${metals}'`)
+  if (metal) filtros.push(`metal = '${metal}'`)
   let consulta = 'SELECT * FROM inventory'
   if (filtros.length > 0) {
     filtros = filtros.join(' AND ')

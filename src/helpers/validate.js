@@ -56,10 +56,10 @@ validateCategory = async (categoria) => {
     return 'ok'
   }
 }
-validateMetal = async (metals) => {
+validateMetal = async (metal) => {
   const SQLquery = {
     text: `SELECT COUNT(*) AS num FROM inventory WHERE metal=$1 group by metal`,
-    values: [metals],
+    values: [metal],
   }
   const { rows } = await pool.query(SQLquery)
   if (rows.length == 0) {
@@ -68,12 +68,7 @@ validateMetal = async (metals) => {
     return 'ok'
   }
 }
-const validateFilter = async ({
-  precio_min,
-  precio_max,
-  categoria,
-  metals,
-}) => {
+const validateFilter = async ({ precio_min, precio_max, categoria, metal }) => {
   let result = bugMaster[0]
   if (precio_min) {
     if (!isNaN(precio_min)) {
@@ -103,8 +98,8 @@ const validateFilter = async ({
     }
   }
 
-  if (metals) {
-    resultValidateMetal = await validateMetal(metals)
+  if (metal) {
+    resultValidateMetal = await validateMetal(metal)
     if (resultValidateMetal === 'ok') {
       result = bugMaster[0]
     } else if (resultValidateMetal === 'E9') {
